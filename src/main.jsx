@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { Component, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -7,6 +7,8 @@ import { RouterProvider } from "react-router/dom";
 import RootLayout from './layout/RootLayout.jsx';
 import Home from './components/Home/Home.jsx';
 import AllJobs from './components/AllJobs/AllJobs.jsx';
+import AuthProvider from './context/AuthProvider.jsx';
+import Register from './components/Register/Register.jsx';
 
 
 const router = createBrowserRouter([
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
       {
         path:'allJobs',
         Component: AllJobs
+      },
+      {
+        path:'Register',
+        Component: Register
       }
     ]
   },
@@ -28,6 +34,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />,
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
