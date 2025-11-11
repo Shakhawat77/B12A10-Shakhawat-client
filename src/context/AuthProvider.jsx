@@ -1,41 +1,57 @@
-import React, { useEffect, useState } from 'react';
-import { AuthContext } from './AuthContext';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase/firebase.init';
+import { createContext, useEffect, useState, useContext } from "react";
+import { 
+  createUserWithEmailAndPassword, 
+  onAuthStateChanged, 
+  signInWithEmailAndPassword,
+  signOut
+} from "firebase/auth";
+import { auth } from "../firebase/firebase.init";
 
-const AuthProvider = ({children}) => {
-const [user ,setUser]=useState (null);
-const [loading, setLoading]= useState(true);
-    const createUser= (email, password)=>{
-        setLoading(true);
-        return createUserWithEmailAndPassword(auth,email,password)
-    }
-const singInUser= (email, password)=>{
+export const AuthContext = createContext();
+export const useAuth = () => useContext(AuthContext);
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const createUser = (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password)
-}
-useEffect(()=>{
-    const unSubscribe= onAuthStateChanged(auth, (currentUser)=>{
-        setUser(currentUser);
-    })
-    return ()=>{
-        unSubscribe()
-    }
-},[])
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-const authInfo={
-createUser,
-singInUser,
-user,
-loading
-}
+  const signInUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    return (
-        <AuthContext value={authInfo}>
-            
-            {children}
-        </AuthContext>
-    );
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Fixed logout: set user to null after signing out
+  const logOut = async () => {
+    await signOut(auth);
+    setUser(null); // <- ensures Navbar hides user info after logout
+  };
+
+  const authInfo = {
+    createUser,
+    signInUser,
+    user,
+    logOut,
+    loading
+  };
+
+  return (
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

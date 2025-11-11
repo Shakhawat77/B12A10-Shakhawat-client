@@ -7,8 +7,10 @@ import { RouterProvider } from "react-router/dom";
 import RootLayout from './layout/RootLayout.jsx';
 import Home from './components/Home/Home.jsx';
 import AllJobs from './components/AllJobs/AllJobs.jsx';
+import AddAJobs from './components/AddAJobs/AddAJobs.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
 import Register from './components/Register/Register.jsx';
+import Login from './components/Login/Login.jsx';
 
 
 const router = createBrowserRouter([
@@ -25,8 +27,16 @@ const router = createBrowserRouter([
         Component: AllJobs
       },
       {
+        path:'addAJobs',
+        Component: AddAJobs
+      },
+      {
         path:'Register',
         Component: Register
+      },
+      {
+        path:'Login',
+        Component: Login
       }
     ]
   },

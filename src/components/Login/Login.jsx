@@ -3,40 +3,24 @@ import { useAuth } from "../../context/AuthProvider.jsx";
 import { useNavigate, Link } from "react-router";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
-import toast, { Toaster } from "react-hot-toast"; 
+import toast, { Toaster } from "react-hot-toast";
 
-const Register = () => {
-  const { createUser } = useAuth();
+const Login = () => {
+  const { signInUser } = useAuth();
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [photoURL, setPhotoURL] = useState("");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Password validation
-  const validatePassword = (password) => {
-    const uppercase = /[A-Z]/.test(password);
-    const lowercase = /[a-z]/.test(password);
-    const minLength = password.length >= 6;
-    return uppercase && lowercase && minLength;
-  };
-
-  // Handle registration
-  const handleRegister = async (e) => {
+  // Handle login with email/password
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (!validatePassword(password)) {
-      toast.error(
-        "Password must be at least 6 characters, include uppercase and lowercase letters."
-      );
-      return;
-    }
-
     setLoading(true);
     try {
-      await createUser(email, password);
-      toast.success("Registration successful!");
-      navigate("/"); 
+      await signInUser(email, password);
+      toast.success("Login successful!");
+      navigate("/"); // Navigate to home page
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -45,13 +29,13 @@ const Register = () => {
     }
   };
 
-  // Google Login
+  // Handle Google login
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
       toast.success("Google login successful!");
-      navigate("/");
+      navigate("/"); // Navigate to home page
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -63,34 +47,15 @@ const Register = () => {
       <Toaster />
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Register now!</h1>
+          <h1 className="text-5xl font-bold">Login now!</h1>
           <p className="py-6">
-            Create your account to post jobs or apply for work.
+            Access your account to post jobs or apply for work.
           </p>
         </div>
 
         <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
           <div className="card-body">
-            <form onSubmit={handleRegister} className="space-y-4">
-              {/* Name */}
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="input input-bordered w-full"
-                required
-              />
-
-              {/* Photo URL */}
-              <input
-                type="text"
-                placeholder="Photo URL"
-                value={photoURL}
-                onChange={(e) => setPhotoURL(e.target.value)}
-                className="input input-bordered w-full"
-              />
-
+            <form onSubmit={handleLogin} className="space-y-4">
               {/* Email */}
               <input
                 type="email"
@@ -111,18 +76,26 @@ const Register = () => {
                 required
               />
 
+              {/* Forget password link (text only) */}
+              <div className="text-right">
+                <span className="text-sm text-blue-600 cursor-pointer">
+                  Forgot password?
+                </span>
+              </div>
+
+              {/* Login Button */}
               <button
                 className="btn btn-neutral w-full mt-2"
                 type="submit"
                 disabled={loading}
               >
-                {loading ? "Registering..." : "Register"}
+                {loading ? "Logging in..." : "Login"}
               </button>
             </form>
 
             <div className="divider">OR</div>
 
-            {/* Google Login */}
+            {/* Google Login Button */}
             <button
               onClick={handleGoogleLogin}
               className="btn btn-outline w-full"
@@ -130,10 +103,11 @@ const Register = () => {
               Continue with Google
             </button>
 
+            {/* Link to Register */}
             <p className="mt-4 text-center">
-              Already have an account?{" "}
-              <Link to="/login" className="link link-primary">
-                Login
+              Don't have an account?{" "}
+              <Link to="/register" className="link link-primary">
+                Register
               </Link>
             </p>
           </div>
@@ -143,4 +117,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
