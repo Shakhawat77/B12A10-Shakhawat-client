@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthProvider.jsx";
 import { useNavigate, Link } from "react-router";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
-import toast, { Toaster } from "react-hot-toast"; 
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [photoURL, setPhotoURL] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Password validation
   const validatePassword = (password) => {
     const uppercase = /[A-Z]/.test(password);
     const lowercase = /[a-z]/.test(password);
@@ -22,21 +22,28 @@ const Register = () => {
     return uppercase && lowercase && minLength;
   };
 
-  // Handle registration
   const handleRegister = async (e) => {
     e.preventDefault();
+
     if (!validatePassword(password)) {
-      toast.error(
-        "Password must be at least 6 characters, include uppercase and lowercase letters."
-      );
+      toast.error("Password must have uppercase, lowercase, and min 6 characters.");
       return;
     }
 
     setLoading(true);
+
     try {
-      await createUser(email, password);
+      // Create user
+      const result = await createUser(email, password);
+
+      // Update profile: Add Name + Photo
+      await updateProfile(result.user, {
+        displayName: name,
+        photoURL: photoURL || null,
+      });
+
       toast.success("Registration successful!");
-      navigate("/"); 
+      navigate("/");
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -45,7 +52,6 @@ const Register = () => {
     }
   };
 
-  // Google Login
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -61,12 +67,11 @@ const Register = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">
       <Toaster />
+
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Register now!</h1>
-          <p className="py-6">
-            Create your account to post jobs or apply for work.
-          </p>
+          <p className="py-6">Create your account to post jobs or apply for work.</p>
         </div>
 
         <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
@@ -123,10 +128,7 @@ const Register = () => {
             <div className="divider">OR</div>
 
             {/* Google Login */}
-            <button
-              onClick={handleGoogleLogin}
-              className="btn btn-outline w-full"
-            >
+            <button onClick={handleGoogleLogin} className="btn btn-outline w-full">
               Continue with Google
             </button>
 

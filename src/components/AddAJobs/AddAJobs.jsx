@@ -2,50 +2,42 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthProvider";
 
 const JobPostForm = () => {
-  const { user } = useAuth(); // logged-in user
-  console.log(user);
+  const { user } = useAuth(); 
   const [loading, setLoading] = useState(false);
-
 
   const handleJobPost = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    
-  const form = e.target;
-  const jobData = {
-    title: form.title.value,
-    postedBy: user?.displayName,
-    category: form.category.value,
-    summary: form.summary.value,
-    coverImage: form.coverImage.value,
-    userEmail: user?.email,
-    postedAt: new Date(), // backend can override if needed
-  };
+    const form = e.target;
 
- try {
-      setLoading(true);
+    const jobData = {
+      title: form.title.value,
+      postedBy: user?.displayName || user?.email, // fallback
+      category: form.category.value,
+      summary: form.summary.value,
+      coverImage: form.coverImage.value,
+      userEmail: user?.email,
+      postedAt: new Date(),
+    };
+
+    try {
       const res = await fetch("http://localhost:3000/job", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(jobData),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to post job");
-      }
+      if (!res.ok) throw new Error("Failed to post job");
 
       alert("Job posted successfully!");
-      // setFormData({ title: "", category: "", summary: "", coverImage: "" });
+      form.reset();
     } catch (err) {
       console.error(err);
       alert(err.message);
     } finally {
       setLoading(false);
     }
-  
   };
 
   return (
@@ -53,46 +45,34 @@ const JobPostForm = () => {
       <h2 className="text-2xl font-bold mb-4">Post a New Job</h2>
 
       <form onSubmit={handleJobPost} className="space-y-4">
-        {/* Title */}
+
+        {/* Job Title */}
         <div>
           <label className="font-semibold">Job Title</label>
           <input
             type="text"
             name="title"
-            placeholder="Enter job title"
             className="input input-bordered w-full"
+            placeholder="Enter job title"
             required
           />
         </div>
 
-        {/* Posted By (Auto-filled) */}
+        {/* User Name (Read-only) */}
         <div>
           <label className="font-semibold">User Name</label>
           <input
-            type="name"
-            value={user?.displayName || ""}
+            type="text"
+            value={user?.displayName || user?.email || ""}
             className="input input-bordered w-full bg-gray-100"
             readOnly
           />
         </div>
-        {/* <div>
-          <label className="font-semibold">Posted By</label>
-          <input 
-            type="text"
-            value={user?.displayName || ""}
-            className="input input-bordered w-full bg-gray-100"
-            readOnly
-          />
-        </div> */}
 
-        {/* Category Dropdown */}
+        {/* Category */}
         <div>
           <label className="font-semibold">Category</label>
-          <select
-            name="category"
-            className="select select-bordered w-full"
-            required
-          >
+          <select name="category" className="select select-bordered w-full" required>
             <option value="">Select Category</option>
             <option>Web Development</option>
             <option>Graphics Design</option>
@@ -113,7 +93,7 @@ const JobPostForm = () => {
           ></textarea>
         </div>
 
-        {/* Cover Image URL */}
+        {/* Image URL */}
         <div>
           <label className="font-semibold">Cover Image URL</label>
           <input
@@ -125,7 +105,7 @@ const JobPostForm = () => {
           />
         </div>
 
-        {/* User Email (Auto-filled) */}
+        {/* User Email (Read-only) */}
         <div>
           <label className="font-semibold">User Email</label>
           <input
@@ -138,11 +118,7 @@ const JobPostForm = () => {
 
         {/* Submit Button */}
         <div>
-          <button
-            type="submit"
-            className="btn btn-primary w-full"
-            disabled={loading}
-          >
+          <button type="submit" className="btn btn-primary w-full" disabled={loading}>
             {loading ? "Posting..." : "Post Job"}
           </button>
         </div>

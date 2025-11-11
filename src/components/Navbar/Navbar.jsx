@@ -74,7 +74,7 @@ const Navbar = () => {
         <div className="navbar-end gap-2 items-center">
           {user ? (
             <>
-              {/* User Avatar */}
+          
               {user.photoURL ? (
                 <div
                   className="tooltip tooltip-bottom"
@@ -95,21 +95,21 @@ const Navbar = () => {
                 </div>
               )}
 
-              {/* Logout button (always visible) */}
+            
               <button
-                className="btn btn-sm btn-primary"
+                className="btn btn-sm btn-primary animate-gradient"
                 onClick={handleLogout}
               >
                 Logout
               </button>
             </>
           ) : (
-            // Show only Login & Register if no user
+         
             <div className="flex gap-2">
-              <NavLink to="/login" className="btn btn-sm btn-outline">
+              <NavLink to="/login" className="btn btn-sm btn-outline animate-gradient">
                 Login
               </NavLink>
-              <NavLink to="/register" className="btn btn-sm btn-primary">
+              <NavLink to="/register" className="btn btn-sm btn-primary animate-gradient">
                 Register
               </NavLink>
             </div>

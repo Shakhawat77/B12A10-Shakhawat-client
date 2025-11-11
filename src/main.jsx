@@ -11,6 +11,7 @@ import AddAJobs from './components/AddAJobs/AddAJobs.jsx';
 import AuthProvider from './context/AuthProvider.jsx';
 import Register from './components/Register/Register.jsx';
 import Login from './components/Login/Login.jsx';
+import JobDetails from './components/JobDetails/JobDetails.jsx';
 
 
 const router = createBrowserRouter([
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path:'Login',
         Component: Login
+      },
+      {
+        path:'JobDetails',
+        Component: JobDetails
       }
     ]
   },
