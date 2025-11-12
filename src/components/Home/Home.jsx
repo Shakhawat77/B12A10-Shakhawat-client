@@ -4,11 +4,10 @@ import { Link } from "react-router";
 const HomePage = () => {
   const [jobs, setJobs] = useState([]);
 
-  // Fetch latest 6 jobs dynamically from backend
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch("http://localhost:3000/jobs?limit=6");
+        const res = await fetch("http://localhost:3000/job?limit=6");
         const data = await res.json();
         setJobs(data);
         console.log(data);
@@ -27,9 +26,20 @@ const HomePage = () => {
     { name: "SEO", img: "https://via.placeholder.com/150" },
   ];
 
+  // 🕒 Helper to format date
+  const formatDate = (isoString) => {
+    if (!isoString) return "Unknown date";
+    const date = new Date(isoString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className="space-y-16">
-    
+      {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-400 to-sky-200 py-20 px-6 text-center text-white relative overflow-hidden">
         <h1 className="text-5xl font-bold mb-4 animate-pulse">
           Freelance MarketPlace
@@ -38,24 +48,18 @@ const HomePage = () => {
           The most reliable platform to post and find freelance jobs.
         </p>
         <div className="flex justify-center gap-4">
-         <Link
-  to="/allJobs"
-  className="btn btn-lg animate-gradient"
->
-  Explore Jobs
-</Link>
+          <Link to="/allJobs" className="btn btn-lg animate-gradient">
+            Explore Jobs
+          </Link>
 
-<Link
-  to="/addAJobs"
-  className="btn btn-lg animate-gradient"
->
-  Create Jobs
-</Link>
+          <Link to="/addAJobs" className="btn btn-lg animate-gradient">
+            Create Jobs
+          </Link>
         </div>
         <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-white opacity-10 rounded-full animate-pulse"></div>
       </section>
 
-   
+      {/* Latest Jobs Section */}
       <section className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-6 text-center">Latest Jobs</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -76,10 +80,19 @@ const HomePage = () => {
                 <p className="text-gray-600 mb-2">
                   <strong>Category:</strong> {job.category}
                 </p>
-                <p className="text-gray-700 mb-2">{job.summary}</p>
+
+                {/* ✂️ Summary limited to 2 lines */}
+                <p className="text-gray-700 mb-2 line-clamp-2">
+                  {job.summary}
+                </p>
+
                 <p className="text-sm text-gray-500">
                   Posted by: {job.postedBy || job.userEmail}
                 </p>
+                <p className="text-xs text-gray-400">
+                  🕒 Posted on: {formatDate(job.createdAt)}
+                </p>
+
                 <Link
                   to={`/job/${job._id}`}
                   className="btn btn-sm btn-primary mt-3"
@@ -92,6 +105,7 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Top Categories */}
       <section className="bg-gray-100 py-16">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold mb-6 text-center">
@@ -115,7 +129,7 @@ const HomePage = () => {
         </div>
       </section>
 
-     
+      {/* About Section */}
       <section className="container mx-auto px-6 py-16 text-center">
         <h2 className="text-3xl font-bold mb-4">About Freelance Market</h2>
         <p className="text-gray-700 max-w-3xl mx-auto">

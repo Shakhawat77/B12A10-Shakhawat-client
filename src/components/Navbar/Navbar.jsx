@@ -21,15 +21,13 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink to="/allJobs">All Jobs</NavLink>
-      </li>
-      <li>
-        <NavLink to="/addAJobs">Add A Job</NavLink>
-      </li>
+     
+           <li><NavLink to="/">Home</NavLink> </li>
+        <li><NavLink to="/allJobs">All Jobs</NavLink> </li>  
+       <li> <NavLink to="/addAJobs">Add A Job</NavLink></li>
+       <li> <NavLink to="/my-accepted-tasks">My Accepted Task</NavLink></li>
+  
+     
     </>
   );
 
@@ -104,7 +102,7 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-         
+            // Show only Login & Register if no user
             <div className="flex gap-2">
               <NavLink to="/login" className="btn btn-sm btn-outline animate-gradient">
                 Login
