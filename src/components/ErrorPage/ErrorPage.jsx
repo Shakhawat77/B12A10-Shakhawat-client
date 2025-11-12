@@ -4,7 +4,7 @@ import errorImg from '../../assets/error-404.png';
 
 const ErrorPage = () => {
     return (
-        <div>
+        <div className='bg-gradient-to-r from-[#47aa8e] to-[#6497a8]'>
              <div className="flex flex-col justify-center items-center py-20">
                 <img
       src={errorImg}

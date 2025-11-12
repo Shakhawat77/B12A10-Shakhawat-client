@@ -4,9 +4,9 @@ import { Link } from "react-router";
 const AllJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sortOrder, setSortOrder] = useState("desc"); // 🆕 Default newest first
+  const [sortOrder, setSortOrder] = useState("desc"); 
 
-  // 🧠 Fetch jobs from backend with sort query
+ 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -21,8 +21,7 @@ const AllJobs = () => {
       }
     };
     fetchJobs();
-  }, [sortOrder]); // 🆕 Refetch when sort changes
-
+  }, [sortOrder]); 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen text-xl font-semibold text-gray-600 animate-pulse">
@@ -40,14 +39,12 @@ const AllJobs = () => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-sky-100 to-white min-h-screen py-16 px-6">
+    <div className="bg-gradient-to-r from-[#47aa8e] to-[#6497a8] to-white min-h-screen py-16 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-12">
           <h1 className="text-4xl font-bold text-center text-gray-800 mb-6 sm:mb-0">
-            💼 Explore Freelance Jobs
+             Explore Freelance Jobs
           </h1>
-
-          {/* 🔽 Sort Dropdown */}
           <div className="flex items-center gap-3">
             <label htmlFor="sort" className="text-gray-700 font-medium">
               Sort by:
@@ -64,14 +61,12 @@ const AllJobs = () => {
           </div>
         </div>
 
-        {/* Job Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
           {jobs.map((job) => (
             <div
               key={job._id}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 group"
+              className="bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border-none group"
             >
-              {/* Cover Image */}
               <div className="relative">
                 <img
                   src={job.coverImage}
@@ -82,8 +77,6 @@ const AllJobs = () => {
                   {job.category}
                 </div>
               </div>
-
-              {/* Job Content */}
               <div className="p-6">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-2 line-clamp-1">
                   {job.title}
@@ -110,7 +103,7 @@ const AllJobs = () => {
                   </p>
                   <Link
                     to={`/job/${job._id}`}
-                    className="bg-gradient-to-r from-blue-500 to-sky-400 text-white px-4 py-2 rounded-lg shadow hover:scale-105 transition-transform text-sm"
+                    className="bg-gradient-to-r from-blue-500 to-sky-400 animate-gradient text-white px-4 py-2 rounded-lg shadow hover:scale-105 transition-transform text-sm"
                   >
                     View Details
                   </Link>

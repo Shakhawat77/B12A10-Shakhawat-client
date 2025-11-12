@@ -4,8 +4,6 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react
 const Footer = () => (
   <footer className="bg-sky-200 text-base-content pt-10">
     <div className="footer sm:footer-horizontal p-10 flex flex-col sm:flex-row justify-between flex-wrap">
-
-      {/* Services Section */}
       <nav className="mb-6 sm:mb-0">
         <h6 className="footer-title text-lg font-bold mb-2">Platform Features</h6>
         <a className="link link-hover">Browse Jobs – Find thousands of freelance opportunities</a>
@@ -13,8 +11,6 @@ const Footer = () => (
         <a className="link link-hover">Secure Authentication – Login via Email or Google</a>
         <a className="link link-hover">Job Management – Add, update, and track your jobs</a>
       </nav>
-
-      {/* About Section */}
       <nav className="mb-6 sm:mb-0">
         <h6 className="footer-title text-lg font-bold mb-2">About Us</h6>
         <a className="link link-hover">How It Works – Learn how freelancers and clients connect</a>
@@ -22,8 +18,6 @@ const Footer = () => (
         <a className="link link-hover">Terms & Policies – Transparent user guidelines</a>
         <a className="link link-hover">FAQs – Quick answers to common questions</a>
       </nav>
-
-      {/* Social Section */}
       <nav>
         <h6 className="footer-title text-lg font-bold mb-2">Follow Us</h6>
         <div className="flex gap-4 text-2xl">
@@ -46,8 +40,6 @@ const Footer = () => (
       </nav>
 
     </div>
-
-    {/* Copyright Section */}
     <div className="border-t border-gray-300 text-center py-4 mt-4">
       <p className="text-sm">
         © {new Date().getFullYear()} Freelance Market — All Rights Reserved.

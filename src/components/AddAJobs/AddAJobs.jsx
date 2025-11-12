@@ -41,37 +41,34 @@ const AddAJobs = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-base-200 rounded-xl shadow-lg mt-10">
-      <h2 className="text-3xl font-bold text-center mb-6">📝 Post a New Job</h2>
+    <div className="bg-gradient-to-r from-[#47aa8e] to-[#6497a8] py-20">
+        <div className="max-w-2xl mx-auto   rounded-xl shadow-lg bg-gradient-to-r from-[#2fcfa2] to-[#437586] px-2 ">
+      <h2 className="text-3xl font-bold text-white text-center mb-6"> Post a New Job</h2>
 
       <form onSubmit={handleJobPost} className="space-y-4">
-        {/* Job Title */}
+
         <div>
           <label className="font-semibold block mb-1">Job Title</label>
           <input
             type="text"
             name="title"
-            className="input input-bordered w-full"
+            className="input input-bordered w-full bg-[#3a826d] text-white"
             placeholder="Enter job title"
             required
           />
         </div>
-
-        {/* User Name (Read-only) */}
         <div>
           <label className="font-semibold block mb-1">User Name</label>
           <input
             type="text"
             value={user?.displayName || user?.email || ""}
-            className="input input-bordered w-full bg-gray-100"
+            className="input input-bordered w-full bg-[#3a826d] text-white"
             readOnly
           />
         </div>
-
-        {/* Category */}
         <div>
           <label className="font-semibold block mb-1">Category</label>
-          <select name="category" className="select select-bordered w-full" required>
+          <select name="category" className="select select-bordered w-full  bg-[#3a826d] text-white" required>
             <option value="">Select Category</option>
             <option>Web Development</option>
             <option>Graphics Design</option>
@@ -80,46 +77,38 @@ const AddAJobs = () => {
             <option>Video Editing</option>
           </select>
         </div>
-
-        {/* Summary */}
         <div>
           <label className="font-semibold block mb-1">Summary</label>
           <textarea
             name="summary"
-            className="textarea textarea-bordered w-full"
+            className="textarea textarea-bordered w-full  bg-[#3a826d] text-white"
             placeholder="Enter job summary or requirements"
             required
           ></textarea>
         </div>
-
-        {/* Cover Image URL */}
         <div>
           <label className="font-semibold block mb-1">Cover Image URL</label>
           <input
             type="text"
             name="coverImage"
             placeholder="Paste image URL"
-            className="input input-bordered w-full"
+            className="input input-bordered w-full  bg-[#3a826d] text-white"
             required
           />
         </div>
-
-        {/* User Email (Read-only) */}
         <div>
           <label className="font-semibold block mb-1">User Email</label>
           <input
             type="email"
             value={user?.email || ""}
-            className="input input-bordered w-full bg-gray-100"
+            className="input input-bordered w-full  bg-[#3a826d] text-white"
             readOnly
           />
         </div>
-
-        {/* Submit Button */}
         <div>
           <button
             type="submit"
-            className="btn btn-primary w-full"
+            className="btn btn-primary animate-gradient w-full"
             disabled={loading}
           >
             {loading ? "Posting..." : "Post Job"}
@@ -127,6 +116,8 @@ const AddAJobs = () => {
         </div>
       </form>
     </div>
+    </div>
+  
   );
 };
 

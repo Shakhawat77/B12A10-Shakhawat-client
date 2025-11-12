@@ -13,7 +13,7 @@ const JobDetails = () => {
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
 
-  // Update form state
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [summary, setSummary] = useState("");
@@ -26,13 +26,10 @@ const JobDetails = () => {
         if (!res.ok) throw new Error("Job not found");
         const data = await res.json();
         setJob(data);
-
-        // Prefill form
         setTitle(data.title);
         setCategory(data.category);
         setSummary(data.summary);
         setCoverImage(data.coverImage || "");
-
         setLoading(false);
       } catch (error) {
         console.error("Error fetching job details:", error);
@@ -69,10 +66,10 @@ const JobDetails = () => {
       });
 
       if (res.ok) {
-        toast.success("✅ Job accepted successfully!");
+        toast.success("Job accepted successfully!");
         navigate("/my-accepted-tasks");
       } else {
-        toast.error("❌ Failed to accept job.");
+        toast.error("Failed to accept job.");
       }
     } catch (error) {
       console.error("Error accepting job:", error);
@@ -90,12 +87,12 @@ const JobDetails = () => {
       });
 
       if (res.ok) {
-        toast.success("✅ Job updated successfully!");
+        toast.success("Job updated successfully!");
         const updatedJob = await res.json();
-        setJob(updatedJob); // update state
-        setShowUpdateForm(false); // hide form after update
+        setJob(updatedJob); 
+        setShowUpdateForm(false); 
       } else {
-        toast.error("❌ Failed to update job.");
+        toast.error(" Failed to update job.");
       }
     } catch (error) {
       console.error("Error updating job:", error);
@@ -112,10 +109,10 @@ const JobDetails = () => {
       });
 
       if (res.ok) {
-        toast.success("✅ Job deleted successfully!");
-        navigate("/"); // redirect to home
+        toast.success("Job deleted successfully!");
+        navigate("/");
       } else {
-        toast.error("❌ Failed to delete job.");
+        toast.error("Failed to delete job.");
       }
     } catch (error) {
       console.error("Error deleting job:", error);
@@ -125,7 +122,7 @@ const JobDetails = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen text-lg">
+      <div className="flex justify-center items-center h-screen text-lg bg-gradient-to-r from-[#49c9a5] to-[#4db4d7]">
         Loading job details...
       </div>
     );
@@ -133,7 +130,7 @@ const JobDetails = () => {
 
   if (!job) {
     return (
-      <div className="text-center py-10 text-red-500">
+      <div className="text-center py-10 text-red-500 bg-gradient-to-r from-[#49c9a5] to-[#4db4d7]">
         Job not found or deleted.
       </div>
     );
@@ -142,16 +139,14 @@ const JobDetails = () => {
   const isOwner = user?.email === job.userEmail;
 
   return (
-    <div className="container mx-auto px-6 py-16">
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300">
-        {/* Cover Image */}
+   <div className="bg-gradient-to-r from-[#49c9a5] to-[#4db4d7]">
+     <div className="container mx-auto px-6 py-16 ">
+      <div className="max-w-4xl mx-auto bg-gradient-to-r from-[#67eac5] to-[#6fd5f7] rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300">
         <img
           src={job.coverImage}
           alt={job.title}
           className="w-full h-64 object-cover rounded-lg mb-6 shadow-md"
         />
-
-        {/* Title & Meta */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-3">
           <h1 className="text-3xl font-bold text-gray-800">{job.title}</h1>
           <p className="text-gray-500 text-sm">
@@ -163,8 +158,6 @@ const JobDetails = () => {
             })}
           </p>
         </div>
-
-        {/* Category & Posted By */}
         <div className="flex flex-wrap gap-4 mb-6">
           <p className="text-gray-600">
             <strong>Category:</strong> {job.category}
@@ -174,10 +167,8 @@ const JobDetails = () => {
           </p>
         </div>
 
-        {/* Full Summary */}
-        <p className="text-gray-700 leading-relaxed mb-8">{job.summary}</p>
 
-        {/* Accept Button */}
+        <p className="text-gray-700 leading-relaxed mb-8">{job.summary}</p>
         {!isOwner && (
           <div className="text-center mb-4">
             <button
@@ -188,8 +179,6 @@ const JobDetails = () => {
             </button>
           </div>
         )}
-
-        {/* Owner Actions - buttons inside container */}
         {isOwner && (
           <div className="flex flex-col gap-4 mb-4">
             <div className="flex gap-4">
@@ -206,8 +195,6 @@ const JobDetails = () => {
                 Delete Job
               </button>
             </div>
-
-            {/* Update Form */}
             {showUpdateForm && (
               <form onSubmit={handleUpdateJob} className="space-y-4 mt-4">
                 <input
@@ -252,6 +239,7 @@ const JobDetails = () => {
         )}
       </div>
     </div>
+   </div>
   );
 };
 

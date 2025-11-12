@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { useAuth } from "../../context/AuthProvider"; // assuming you have AuthProvider
+import { useAuth } from "../../context/AuthProvider"; 
 
 const MyAcceptedTasks = () => {
-  const { user } = useAuth(); // get logged-in user
+  const { user } = useAuth();
   const [acceptedJobs, setAcceptedJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch accepted jobs from backend
   const fetchAcceptedJobs = async () => {
     try {
       const res = await fetch("http://localhost:3000/accepted");
@@ -34,7 +33,7 @@ const MyAcceptedTasks = () => {
       });
       if (res.ok) {
         setAcceptedJobs((prev) => prev.filter((job) => job._id !== id));
-        toast.success("✅ Task marked as Done!");
+        toast.success("Task marked as Done!");
       } else {
         toast.error("Failed to mark task as Done");
       }
@@ -51,7 +50,7 @@ const MyAcceptedTasks = () => {
       });
       if (res.ok) {
         setAcceptedJobs((prev) => prev.filter((job) => job._id !== id));
-        toast.info("❌ Task canceled and removed!");
+        toast.info("Task canceled and removed!");
       } else {
         toast.error("Failed to cancel task");
       }
@@ -63,7 +62,7 @@ const MyAcceptedTasks = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen text-lg text-gray-600">
+      <div className="flex justify-center bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] items-center h-screen text-lg text-gray-600">
         Loading your accepted tasks...
       </div>
     );
@@ -71,27 +70,27 @@ const MyAcceptedTasks = () => {
 
   if (acceptedJobs.length === 0) {
     return (
-      <div className="text-center py-20 text-gray-500 text-lg font-medium">
+      <div className="text-center py-20 bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] text-gray-500 text-lg font-medium">
         You haven’t accepted any jobs yet.
       </div>
     );
   }
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-sky-100 to-white min-h-screen py-16 px-6">
+    <div className="bg-gradient-to-r from-[#49c9a5] to-[#32c5f6] via-sky-100 to-white min-h-screen py-16 px-6">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
-          🧾 My Accepted Tasks
+          My Accepted Tasks
         </h1>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {acceptedJobs.map((job) => {
-            const isOwner = user?.email === job.userEmail; // check if current user is owner
+            const isOwner = user?.email === job.userEmail; 
 
             return (
               <div
                 key={job._id}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
+                className="bg-gradient-to-r from-[#6fecc9] to-[#75d8f9] rounded-2xl shadow-md hover:shadow-xl  duration-300 overflow-hidden border-none"
               >
                 <img
                   src={job.coverImage}
@@ -129,7 +128,7 @@ const MyAcceptedTasks = () => {
                           : "text-gray-400 cursor-not-allowed"
                       }`}
                     >
-                      <FaCheckCircle className="text-lg" /> Done
+                      <FaCheckCircle className="text-lg" />ADD
                     </button>
                     <button
                       onClick={() => handleCancel(job._id)}

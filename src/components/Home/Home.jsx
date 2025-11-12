@@ -24,10 +24,10 @@ const HomePage = () => {
   }, []);
 
   const topCategories = [
-    { name: "Web Development", img: "https://via.placeholder.com/150" },
-    { name: "Graphics Design", img: "https://via.placeholder.com/150" },
-    { name: "Digital Marketing", img: "https://via.placeholder.com/150" },
-    { name: "SEO", img: "https://via.placeholder.com/150" },
+    { name: "Web Development", img: "https://storage.googleapis.com/ureify-strapi-assets/web_developer_resume_4906271445/web_developer_resume_4906271445.jpeg" },
+    { name: "Graphics Design", img: "https://kritagyata.in/wp-content/uploads/2024/01/graphic-design-1500-x-900-picture-lpuf40e9jm621ews-1500x750.jpg" },
+    { name: "Digital Marketing", img: "https://s44783.pcdn.co/in/wp-content/uploads/sites/3/2023/03/How-to-Learn-Digital-Marketing-768x511.jpg.webp" },
+    { name: "SEO", img: "https://pairroxz.com/blog/wp-content/uploads/2023/03/What-is-SEO-in-Web-Development_10-Best-Points-How-SEO-and-Website-Development-Interact-3.png" },
   ];
 
   const formatDate = (isoString) => {
@@ -39,13 +39,10 @@ const HomePage = () => {
       day: "numeric",
     });
   };
-
-  // GSAP infinite marquee
   useEffect(() => {
     const container = topCategoriesRef.current;
     if (!container) return;
 
-    // Duplicate items for seamless loop
     container.innerHTML += container.innerHTML;
 
     const cards = container.children;
@@ -53,13 +50,12 @@ const HomePage = () => {
     const totalWidth = cardWidth * topCategories.length;
 
     gsap.to(container, {
-      x: `-=${totalWidth}`, // move left by total width
+      x: `-=${totalWidth}`, 
       duration: 12,
       ease: "linear",
       repeat: -1,
       modifiers: {
-        x: (x) => {
-          // loop continuously
+        x: (x) => {        
           const val = parseFloat(x);
           return `${(val % totalWidth)}px`;
         },
@@ -68,9 +64,8 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="space-y-16">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-400 to-sky-200 py-20 px-6 text-center text-white relative overflow-hidden">
+    <div className="space-y-16 bg-gradient-to-r from-[#47aa8e] to-[#6497a8]">     
+      <section className="bg-gradient-to-r from-[#33826c] to-[#4c7684] py-20 px-6 text-center text-white relative overflow-hidden">
         <h1 className="text-5xl font-bold mb-4 animate-pulse">
           Freelance MarketPlace
         </h1>
@@ -86,9 +81,7 @@ const HomePage = () => {
           </Link>
         </div>
         <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-white opacity-10 rounded-full animate-pulse"></div>
-      </section>
-
-      {/* Latest Jobs Section */}
+      </section>     
       <section className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-6 text-center">Latest Jobs</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -98,7 +91,7 @@ const HomePage = () => {
             jobs.map((job) => (
               <div
                 key={job._id}
-                className="card bg-base-100 shadow-md p-4 hover:shadow-xl transition"
+                className="card bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] shadow-md p-4 hover:shadow-xl transition"
               >
                 <img
                   src={job.coverImage}
@@ -110,10 +103,10 @@ const HomePage = () => {
                   <strong>Category:</strong> {job.category}
                 </p>
                 <p className="text-gray-700 mb-2 line-clamp-2">{job.summary}</p>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-700">
                   Posted by: {job.postedBy || job.userEmail}
                 </p>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-black">
                   🕒 Posted on: {formatDate(job.createdAt)}
                 </p>
                 <Link
@@ -128,10 +121,9 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Top Categories Section */}
-      <section className="bg-gray-100 py-16 overflow-hidden relative">
+      <section className="bg-gradient-to-r from-[#164a3b] to-[#1b647d] py-16 overflow-hidden relative">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-6 text-center">Top Categories</h2>
+          <h2 className="text-3xl font-bold mb-6 text-white text-center">Top Categories</h2>
           <div
             ref={topCategoriesRef}
             className="flex gap-6 w-max"
@@ -140,7 +132,7 @@ const HomePage = () => {
             {topCategories.map((cat, idx) => (
               <div
                 key={idx}
-                className="card shadow-md text-center p-4 bg-white rounded-lg w-48 flex-shrink-0"
+                className="card shadow-md text-center p-4 bg-[#14976b] rounded-lg w-48 flex-shrink-0"
               >
                 <img
                   src={cat.img}
@@ -153,8 +145,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* About Section */}
       <section className="container mx-auto px-6 py-16 text-center">
         <h2 className="text-3xl font-bold mb-4">About Freelance Market</h2>
         <p className="text-gray-700 max-w-3xl mx-auto">

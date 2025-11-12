@@ -13,14 +13,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Handle login with email/password
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       await signInUser(email, password);
       toast.success("Login successful!");
-      navigate("/"); // Navigate to home page
+      navigate("/"); 
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -29,13 +29,13 @@ const Login = () => {
     }
   };
 
-  // Handle Google login
+
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
       toast.success("Google login successful!");
-      navigate("/"); // Navigate to home page
+      navigate("/"); 
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -43,9 +43,9 @@ const Login = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] min-h-screen">
       <Toaster />
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content flex-col lg:flex-row-reverse ">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Login now!</h1>
           <p className="py-6">
@@ -53,37 +53,34 @@ const Login = () => {
           </p>
         </div>
 
-        <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
+        <div className="card bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] w-full max-w-sm shadow-2xl">
           <div className="card-body">
             <form onSubmit={handleLogin} className="space-y-4">
-              {/* Email */}
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-[#3a826d] text-white"
                 required
               />
-
-              {/* Password */}
-              <input
+                            <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-[#3a826d] text-white"
                 required
               />
 
-              {/* Forget password link (text only) */}
+             
               <div className="text-right">
                 <span className="text-sm text-blue-600 cursor-pointer">
                   Forgot password?
                 </span>
               </div>
 
-              {/* Login Button */}
+        
               <button
                 className="btn btn-neutral w-full mt-2"
                 type="submit"
@@ -95,7 +92,7 @@ const Login = () => {
 
             <div className="divider">OR</div>
 
-            {/* Google Login Button */}
+    
             <button
               onClick={handleGoogleLogin}
               className="btn btn-outline w-full"
@@ -103,7 +100,7 @@ const Login = () => {
               Continue with Google
             </button>
 
-            {/* Link to Register */}
+     
             <p className="mt-4 text-center">
               Don't have an account?{" "}
               <Link to="/register" className="link link-primary">

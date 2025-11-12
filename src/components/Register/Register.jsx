@@ -33,21 +33,17 @@ const Register = () => {
     setLoading(true);
 
     try {
-      // 1️⃣ Create user in Firebase
+   
       const result = await createUser(email, password);
-
-      // 2️⃣ Update Firebase profile with name + photo
       await updateProfile(result.user, {
         displayName: name,
         photoURL: photoURL || null,
       });
-
-      // 3️⃣ Store user data in backend
       const userData = {
         name,
         email,
         photoURL: photoURL || null,
-        createdAt: new Date().toISOString(), // store time and date
+        createdAt: new Date().toISOString(), 
       };
 
       await fetch("http://localhost:3000/users", {
@@ -81,7 +77,7 @@ const Register = () => {
   };
 
   return (
-    <div className="hero bg-base-200 min-h-screen">
+    <div className="hero bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] min-h-screen">
       <Toaster />
 
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -90,45 +86,42 @@ const Register = () => {
           <p className="py-6">Create your account to post jobs or apply for work.</p>
         </div>
 
-        <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
+        <div className="card bg-gradient-to-r from-[#47aa8e] to-[#6497a8] w-full max-w-sm shadow-2xl">
           <div className="card-body">
             <form onSubmit={handleRegister} className="space-y-4">
-              {/* Name */}
+           
               <input
                 type="text"
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-[#3a826d] text-white"
                 required
               />
 
-              {/* Photo URL */}
               <input
                 type="text"
                 placeholder="Photo URL"
                 value={photoURL}
                 onChange={(e) => setPhotoURL(e.target.value)}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-[#3a826d] text-white"
               />
 
-              {/* Email */}
+        
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-[#3a826d] text-white"
                 required
               />
-
-              {/* Password */}
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full bg-[#3a826d] text-white"
                 required
               />
 
@@ -143,7 +136,6 @@ const Register = () => {
 
             <div className="divider">OR</div>
 
-            {/* Google Login */}
             <button onClick={handleGoogleLogin} className="btn btn-outline w-full">
               Continue with Google
             </button>
