@@ -1,5 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;

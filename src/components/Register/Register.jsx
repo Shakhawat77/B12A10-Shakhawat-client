@@ -33,13 +33,29 @@ const Register = () => {
     setLoading(true);
 
     try {
-      // Create user
+      // 1️⃣ Create user in Firebase
       const result = await createUser(email, password);
 
-      // Update profile: Add Name + Photo
+      // 2️⃣ Update Firebase profile with name + photo
       await updateProfile(result.user, {
         displayName: name,
         photoURL: photoURL || null,
+      });
+
+      // 3️⃣ Store user data in backend
+      const userData = {
+        name,
+        email,
+        photoURL: photoURL || null,
+        createdAt: new Date().toISOString(), // store time and date
+      };
+
+      await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
       });
 
       toast.success("Registration successful!");

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router"; 
 
 const AllJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("desc"); // 🆕 Default newest first
 
+  // 🧠 Fetch jobs from backend with sort query
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch("http://localhost:3000/job");
+        setLoading(true);
+        const res = await fetch(`http://localhost:3000/job?sort=${sortOrder}`);
         const data = await res.json();
         setJobs(data);
         setLoading(false);
@@ -18,7 +21,7 @@ const AllJobs = () => {
       }
     };
     fetchJobs();
-  }, []);
+  }, [sortOrder]); // 🆕 Refetch when sort changes
 
   if (loading) {
     return (
@@ -39,9 +42,27 @@ const AllJobs = () => {
   return (
     <div className="bg-gradient-to-br from-blue-50 via-sky-100 to-white min-h-screen py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
-          💼 Explore Freelance Jobs
-        </h1>
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-12">
+          <h1 className="text-4xl font-bold text-center text-gray-800 mb-6 sm:mb-0">
+            💼 Explore Freelance Jobs
+          </h1>
+
+          {/* 🔽 Sort Dropdown */}
+          <div className="flex items-center gap-3">
+            <label htmlFor="sort" className="text-gray-700 font-medium">
+              Sort by:
+            </label>
+            <select
+              id="sort"
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="select select-bordered border-blue-300 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <option value="desc">Newest First</option>
+              <option value="asc">Oldest First</option>
+            </select>
+          </div>
+        </div>
 
         {/* Job Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -13,6 +13,7 @@ import Register from './components/Register/Register.jsx';
 import Login from './components/Login/Login.jsx';
 import JobDetails from './components/JobDetails/JobDetails.jsx';
 import MyAcceptedTasks from './components/MyAcceptedTask/MyAcceptedTask.jsx';
+import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -47,8 +48,11 @@ const router = createBrowserRouter([
       {
         path:'/my-accepted-tasks',
         Component: MyAcceptedTasks
+      },
+      {
+     path:"*",
+     Component: ErrorPage
       }
-
     ]
   },
 ]);
