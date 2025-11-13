@@ -2,7 +2,7 @@ import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const Footer = () => (
-  <footer className="bg-sky-200 text-base-content pt-10">
+  <footer className="bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] text-base-content pt-10">
     <div className="footer sm:footer-horizontal p-10 flex flex-col sm:flex-row justify-between flex-wrap">
       <nav className="mb-6 sm:mb-0">
         <h6 className="footer-title text-lg font-bold mb-2">Platform Features</h6>

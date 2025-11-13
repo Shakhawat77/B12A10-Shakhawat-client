@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthProvider.jsx";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useLocation } from "react-router";
 import { GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import toast, { Toaster } from "react-hot-toast";
@@ -21,6 +21,8 @@ const Register = () => {
     const minLength = password.length >= 6;
     return uppercase && lowercase && minLength;
   };
+  const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -46,7 +48,7 @@ const Register = () => {
         createdAt: new Date().toISOString(), 
       };
 
-      await fetch("http://localhost:3000/users", {
+      await fetch("https://freelance-server-beige.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,7 +57,7 @@ const Register = () => {
       });
 
       toast.success("Registration successful!");
-      navigate("/");
+      navigate(from, { replace: true }); 
     } catch (error) {
       console.error(error);
       toast.error(error.message);

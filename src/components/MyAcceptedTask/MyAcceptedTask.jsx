@@ -10,7 +10,7 @@ const MyAcceptedTasks = () => {
 
   const fetchAcceptedJobs = async () => {
     try {
-      const res = await fetch("http://localhost:3000/accepted");
+      const res = await fetch("https://freelance-server-beige.vercel.app/accepted");
       if (!res.ok) throw new Error("Failed to fetch accepted jobs");
       const data = await res.json();
       setAcceptedJobs(data);
@@ -28,7 +28,7 @@ const MyAcceptedTasks = () => {
 
   const handleDone = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/accepted/${id}`, {
+      const res = await fetch(`https://freelance-server-beige.vercel.app/accepted/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -45,7 +45,7 @@ const MyAcceptedTasks = () => {
 
   const handleCancel = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3000/accepted/${id}`, {
+      const res = await fetch(`https://freelance-server-beige.vercel.app/myAccepted-task/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {
@@ -77,7 +77,7 @@ const MyAcceptedTasks = () => {
   }
 
   return (
-    <div className="bg-gradient-to-r from-[#49c9a5] to-[#32c5f6] via-sky-100 to-white min-h-screen py-16 px-6">
+    <div className="bg-gradient-to-r from-[#49c9a5] to-[#32c5f6] min-h-screen py-16 px-6">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
           My Accepted Tasks
