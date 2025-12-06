@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthProvider.jsx";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useLocation } from "react-router";
+
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 import toast, { Toaster } from "react-hot-toast";
@@ -8,11 +9,12 @@ import toast, { Toaster } from "react-hot-toast";
 const Login = () => {
   const { signInUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,7 +22,7 @@ const Login = () => {
     try {
       await signInUser(email, password);
       toast.success("Login successful!");
-      navigate("/"); 
+     navigate(from, { replace: true });
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -29,13 +31,12 @@ const Login = () => {
     }
   };
 
-
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
       toast.success("Google login successful!");
-      navigate("/"); 
+      navigate(from, { replace: true });
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -64,7 +65,7 @@ const Login = () => {
                 className="input input-bordered w-full bg-[#3a826d] text-white"
                 required
               />
-                            <input
+              <input
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -73,14 +74,12 @@ const Login = () => {
                 required
               />
 
-             
               <div className="text-right">
                 <span className="text-sm text-blue-600 cursor-pointer">
                   Forgot password?
                 </span>
               </div>
 
-        
               <button
                 className="btn btn-neutral w-full mt-2"
                 type="submit"
@@ -92,7 +91,6 @@ const Login = () => {
 
             <div className="divider">OR</div>
 
-    
             <button
               onClick={handleGoogleLogin}
               className="btn btn-outline w-full"
@@ -100,7 +98,6 @@ const Login = () => {
               Continue with Google
             </button>
 
-     
             <p className="mt-4 text-center">
               Don't have an account?{" "}
               <Link to="/register" className="link link-primary">

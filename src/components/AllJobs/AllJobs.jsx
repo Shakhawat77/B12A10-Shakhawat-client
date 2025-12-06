@@ -11,7 +11,7 @@ const AllJobs = () => {
     const fetchJobs = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:3000/job?sort=${sortOrder}`);
+        const res = await fetch(`https://freelance-server-beige.vercel.app/allJobs?sort=${sortOrder}`);
         const data = await res.json();
         setJobs(data);
         setLoading(false);

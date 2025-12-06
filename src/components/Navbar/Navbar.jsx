@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthProvider.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -25,6 +26,7 @@ const Navbar = () => {
       <li><NavLink to="/allJobs">All Jobs</NavLink> </li>  
       <li><NavLink to="/addAJobs">Add A Job</NavLink></li>
       <li><NavLink to="/my-accepted-tasks">My Accepted Task</NavLink></li>
+      <li><NavLink to="/MyAddedJobs">My Added Jobs</NavLink></li>
     </>
   );
 
@@ -71,6 +73,7 @@ const Navbar = () => {
           </div>
 
           <div className="navbar-end gap-2 items-center">
+              <ThemeToggle />
             {user ? (
               <>
                 {user.photoURL ? (
@@ -102,6 +105,7 @@ const Navbar = () => {
               </>
             ) : (
               <div className="flex gap-2">
+               
                 <NavLink to="/login" className="btn btn-sm btn-outline animate-gradient">
                   Login
                 </NavLink>

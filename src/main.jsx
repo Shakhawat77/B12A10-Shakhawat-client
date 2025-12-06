@@ -1,7 +1,6 @@
 import { Component, StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import './index.css';
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import RootLayout from './layout/RootLayout.jsx';
@@ -14,6 +13,8 @@ import Login from './components/Login/Login.jsx';
 import JobDetails from './components/JobDetails/JobDetails.jsx';
 import MyAcceptedTasks from './components/MyAcceptedTask/MyAcceptedTask.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
+import PrivateRoute from './Routs/PrivateRoute.jsx';
+import MyAddedJobs from './components/MyAddedJobs/MyAddedJobs.jsx';
 
 
 const router = createBrowserRouter([
@@ -26,31 +27,59 @@ const router = createBrowserRouter([
         Component: Home
       },
       {
-        path:'allJobs',
-        Component: AllJobs
+        path:'/allJobs',
+        element: (
+          <PrivateRoute>
+            <AllJobs></AllJobs>
+          </PrivateRoute>
+        ),
+      },
+      // {
+      //   path:'addAJobs',
+      //   Component: <PrivateRoute><AddAJobs></AddAJobs></PrivateRoute>
+      // },
+       {
+        path: "/addAJobs",
+        element: (
+          <PrivateRoute>
+            <AddAJobs></AddAJobs>
+          </PrivateRoute>
+        ),
       },
       {
-        path:'addAJobs',
-        Component: AddAJobs 
+        path:"/MyAddedJobs",
+        element:(
+          <PrivateRoute>
+            <MyAddedJobs></MyAddedJobs>
+          </PrivateRoute>
+        )
       },
       {
-        path:'Register',
+        path:'/Register',
         Component: Register
       },
       {
-        path:'Login',
+        path:'/Login',
         Component: Login
       },
       {
         path:'/job/:id',
-        Component: JobDetails
+        element: (
+          <PrivateRoute>
+            <JobDetails></JobDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path:'/my-accepted-tasks',
-        Component: MyAcceptedTasks
+        element: (
+          <PrivateRoute>
+            <MyAcceptedTasks></MyAcceptedTasks>
+          </PrivateRoute>
+        ),
       },
       {
-     path:"*",
+     path:"/*",
      Component: ErrorPage
       }
     ]
