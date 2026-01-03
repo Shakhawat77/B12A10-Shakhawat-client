@@ -15,6 +15,7 @@ import MyAcceptedTasks from './components/MyAcceptedTask/MyAcceptedTask.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import PrivateRoute from './Routs/PrivateRoute.jsx';
 import MyAddedJobs from './components/MyAddedJobs/MyAddedJobs.jsx';
+import Profile from './components/Profile/Profile.jsx';
 
 
 const router = createBrowserRouter([
@@ -61,6 +62,11 @@ const router = createBrowserRouter([
       {
         path:'/Login',
         Component: Login
+      },
+
+      {
+path:'/profile',
+Component: Profile
       },
       {
         path:'/job/:id',

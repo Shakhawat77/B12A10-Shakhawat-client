@@ -1,98 +1,54 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@keyframes gradientBG {
+/* -------------------------------------------------
+   Global Transitions
+------------------------------------------------- */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* -------------------------------------------------
+   Subtle Accent Animation (OPTIONAL – PROFESSIONAL)
+------------------------------------------------- */
+@keyframes softGlow {
   0% {
-    background-position: 0% 50%;
+    box-shadow: 0 0 0 rgba(59, 130, 246, 0);
   }
   50% {
-    background-position: 100% 50%;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
   }
   100% {
-    background-position: 0% 50%;
+    box-shadow: 0 0 0 rgba(59, 130, 246, 0);
   }
 }
 
-.animate-gradient {
-  background: linear-gradient(270deg, #38bdf8, #3b82f6, #6366f1, #8b5cf6);
-  background-size: 800% 800%;
-  animation: gradientBG 8s ease infinite;
-  color: white;
-  transition: transform 0.3s ease, animation-duration 0.3s ease;
+.animate-soft {
+  animation: softGlow 4s ease-in-out infinite;
 }
 
-.animate-gradient:hover {
-  transform: scale(1.05);       
-  animation-duration: 4s;      
-}
-html {
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* Light mode */
-body {
-  background-color: #f8fafc; /* Tailwind gray-50 */
-  color: #1f2937; /* Tailwind gray-800 */
+/* -------------------------------------------------
+   Utility Enhancements (Safe)
+------------------------------------------------- */
+.container-padding {
+  @apply px-4 md:px-6;
 }
 
-/* Dark mode using Tailwind 'dark' class */
-.dark body {
-  background-color: #1f2937; /* Tailwind gray-800 */
-  color: #f8fafc; /* Tailwind gray-50 */
+/* Line clamp fallback (if plugin not installed) */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
-/* Card backgrounds */
-.card {
-  background-color: #ffffff; /* Light mode card */
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.dark .card {
-  background-color: #374151; /* Dark mode card */
-  color: #f3f4f6; /* Light text on dark card */
-}
-
-/* Inputs, selects, textarea */
-input,
-select,
-textarea {
-  background-color: #f3f4f6;
-  color: #111827;
-  border-color: #d1d5db;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-.dark input,
-.dark select,
-.dark textarea {
-  background-color: #4b5563; /* dark gray */
-  color: #f9fafb; /* light text */
-  border-color: #6b7280;
-}
-
-/* Buttons */
-.btn {
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.dark .btn-primary {
-  background-color: #2563eb; /* dark mode primary */
-  color: white;
-}
-
-.dark .btn-outline {
-  border-color: #f3f4f6;
-  color: #f3f4f6;
-}
-
-/* Optional: modal background */
-.modal-bg {
-  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
-}
-
-.dark .modal-bg {
-  background-color: rgba(255, 255, 255, 0.1); /* lighter overlay in dark mode if needed */
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router";
-import { useAuth } from "../../context/AuthProvider.jsx";
+import { useAuth } from "../../context/AuthProvider";
 import { toast, ToastContainer } from "react-toastify";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import "react-toastify/dist/ReactToastify.css";
-import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -12,41 +12,50 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      toast.success("Logged out successfully!");
+      toast.success("Logged out successfully");
       navigate("/login");
-    } catch (err) {
-      console.error(err);
-      toast.error("Failed to logout");
+    } catch {
+      toast.error("Logout failed");
     }
   };
 
-  const links = (
+  const navLinkClass = ({ isActive }) =>
+    isActive
+      ? "font-semibold text-primary border-b-2 border-primary"
+      : "hover:text-primary transition";
+
+  const publicLinks = (
     <>
-      <li><NavLink to="/">Home</NavLink> </li>
-      <li><NavLink to="/allJobs">All Jobs</NavLink> </li>  
-      <li><NavLink to="/addAJobs">Add A Job</NavLink></li>
-      <li><NavLink to="/my-accepted-tasks">My Accepted Task</NavLink></li>
-      <li><NavLink to="/MyAddedJobs">My Added Jobs</NavLink></li>
+      <li><NavLink to="/" className={navLinkClass}>Home</NavLink></li>
+      <li><NavLink to="/allJobs" className={navLinkClass}>All Jobs</NavLink></li>
+    </>
+  );
+
+  const privateLinks = (
+    <>
+      <li><NavLink to="/addAJobs" className={navLinkClass}>Add Job</NavLink></li>
+      <li><NavLink to="/my-accepted-tasks" className={navLinkClass}>Accepted Tasks</NavLink></li>
+      <li><NavLink to="/myAddedJobs" className={navLinkClass}>My Jobs</NavLink></li>
+      <li><NavLink to="/profile" className={navLinkClass}>Profile</NavLink></li>
     </>
   );
 
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} />
-      <div>
-        <div
-          className="navbar shadow-sm px-4 relative bg-gradient-to-r from-[#89A8B2] to-[#266352]"
-         
-        >
+
+      <nav className="sticky top-0 z-50 bg-base-100 border-b">
+        <div className="navbar max-w-7xl mx-auto px-4">
+
+          {/* LEFT */}
           <div className="navbar-start">
-            <div className="dropdown">
-              <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div className="dropdown lg:hidden">
+              <label tabIndex={0} className="btn btn-ghost">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
+                  className="w-5 h-5"
                   fill="none"
-                  viewBox="0 0 24 24"
                   stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
                   <path
                     strokeLinecap="round"
@@ -55,68 +64,73 @@ const Navbar = () => {
                     d="M4 6h16M4 12h8m-8 6h16"
                   />
                 </svg>
-              </div>
+              </label>
+
               <ul
-                tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
+                tabIndex={0}
+                className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-56"
               >
-                {links}
+                {publicLinks}
+                {user && privateLinks}
               </ul>
             </div>
-            <NavLink to="/" className="font-bold text-xl text-blue-900 animate-pulse">
-              Freelance Market
+
+            <NavLink to="/" className="text-xl font-bold tracking-wide">
+              Freelance<span className="text-primary">Market</span>
             </NavLink>
           </div>
 
+          {/* CENTER */}
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">{links}</ul>
+            <ul className="menu menu-horizontal gap-4">
+              {publicLinks}
+              {user && privateLinks}
+            </ul>
           </div>
 
-          <div className="navbar-end gap-2 items-center">
-              <ThemeToggle />
-            {user ? (
-              <>
-                {user.photoURL ? (
-                  <div
-                    className="tooltip tooltip-bottom"
-                    data-tip={user.displayName || user.email}
-                  >
-                    <img
-                      src={user.photoURL}
-                      alt="User"
-                      className="w-10 h-10 rounded-full border border-gray-300"
-                    />
-                  </div>
-                ) : (
-                  <div
-                    className="tooltip tooltip-bottom w-10 h-10 rounded-full bg-gray-400 flex items-center justify-center text-white"
-                    data-tip={user.displayName || user.email}
-                  >
-                    {user.email[0].toUpperCase()}
-                  </div>
-                )}
+          {/* RIGHT */}
+          <div className="navbar-end gap-3">
+            <ThemeToggle />
 
-                <button
-                  className="btn btn-sm btn-primary animate-gradient"
-                  onClick={handleLogout}
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="avatar cursor-pointer">
+                  <div className="w-10 rounded-full ring ring-primary ring-offset-2">
+                    {user.photoURL ? (
+                      <img src={user.photoURL} alt="User profile" />
+                    ) : (
+                      <div className="bg-primary text-white flex items-center justify-center h-full">
+                        {user.email?.[0]?.toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+                </label>
+
+                <ul
+                  tabIndex={0}
+                  className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                  Logout
-                </button>
-              </>
+                  <li className="menu-title">
+                    <span>{user.displayName || user.email}</span>
+                  </li>
+                  <li><NavLink to="/profile">Profile</NavLink></li>
+                  <li><button onClick={handleLogout}>Logout</button></li>
+                </ul>
+              </div>
             ) : (
-              <div className="flex gap-2">
-               
-                <NavLink to="/login" className="btn btn-sm btn-outline animate-gradient">
+              <>
+                <NavLink to="/login" className="btn btn-outline btn-sm">
                   Login
                 </NavLink>
-                <NavLink to="/register" className="btn btn-sm btn-primary animate-gradient">
+                <NavLink to="/register" className="btn btn-primary btn-sm">
                   Register
                 </NavLink>
-              </div>
+              </>
             )}
           </div>
+
         </div>
-      </div>
+      </nav>
     </>
   );
 };
