@@ -42,7 +42,6 @@ const Login = () => {
     }
   };
 
-  /* ---------------- Skeleton Loader ---------------- */
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77]">
@@ -62,8 +61,8 @@ const Login = () => {
       <Toaster />
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left mb-6 lg:mb-0">
-          <h1 className="text-5xl font-bold text-white">Login now!</h1>
-          <p className="py-6 text-white/90">
+          <h1 className="text-5xl font-bold text-gary">Login now!</h1>
+          <p className="py-6 text-gray/90">
             Access your account to post jobs or apply for work.
           </p>
         </div>
@@ -76,7 +75,7 @@ const Login = () => {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-white placeholder-white/80"
+                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-gary placeholder-white/80"
                 required
               />
               <input
@@ -84,7 +83,7 @@ const Login = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-white placeholder-white/80"
+                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-gray placeholder-white/80"
                 required
               />
 
@@ -103,16 +102,16 @@ const Login = () => {
               </button>
             </form>
 
-            <div className="divider text-white/80">OR</div>
+            <div className="divider text-gray/80">OR</div>
 
             <button
               onClick={handleGoogleLogin}
-              className="btn btn-outline w-full text-white border-white hover:bg-white dark:bg-gray-800 hover:text-gray-800 dark:text-gray-200"
+              className="btn btn-outline w-full text-gray border-white hover:bg-white dark:bg-gray-800 hover:text-gray-800 dark:text-gray-200"
             >
               Continue with Google
             </button>
 
-            <p className="mt-4 text-center text-white/90">
+            <p className="mt-4 text-center text-gray/90">
               Don't have an account?{" "}
               <Link to="/register" className="link link-primary">
                 Register

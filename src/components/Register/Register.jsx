@@ -75,7 +75,6 @@ const Register = () => {
     }
   };
 
-  /* ---------------- Skeleton Loader ---------------- */
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77]">
@@ -96,8 +95,8 @@ const Register = () => {
 
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left mb-6 lg:mb-0">
-          <h1 className="text-5xl font-bold text-white">Register now!</h1>
-          <p className="py-6 text-white/90">
+          <h1 className="text-5xl font-bold text-shadow-black">Register now!</h1>
+          <p className="py-6 text-black/90">
             Create your account to post jobs or apply for work.
           </p>
         </div>
@@ -110,7 +109,7 @@ const Register = () => {
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-white placeholder-white/80"
+                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-black placeholder-gray/80"
                 required
               />
 
@@ -119,7 +118,7 @@ const Register = () => {
                 placeholder="Photo URL"
                 value={photoURL}
                 onChange={(e) => setPhotoURL(e.target.value)}
-                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-white placeholder-white/80"
+                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-black placeholder-gray/80"
               />
 
               <input
@@ -127,7 +126,7 @@ const Register = () => {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-white placeholder-white/80"
+                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-black placeholder-gray/80"
                 required
               />
 
@@ -136,7 +135,7 @@ const Register = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-white placeholder-white/80"
+                className="input input-bordered w-full bg-white dark:bg-gray-800/20 text-black placeholder-gary/80"
                 required
               />
 
@@ -149,7 +148,7 @@ const Register = () => {
               </button>
             </form>
 
-            <div className="divider text-white/80">OR</div>
+            <div className="divider text-gray/80">OR</div>
 
             <button
               onClick={handleGoogleLogin}

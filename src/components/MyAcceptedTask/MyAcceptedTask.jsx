@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { useAuth } from "../../context/AuthProvider";
 
-/* ---------------- Skeleton Loader ---------------- */
 const AcceptedTasksSkeleton = () => (
   <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6 flex justify-center items-center">
     <div className="max-w-6xl w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">

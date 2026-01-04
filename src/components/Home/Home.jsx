@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 
-/* ---------------- Skeleton ---------------- */
 const JobCardSkeleton = () => (
   <div className="card bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-md animate-pulse h-full rounded-2xl overflow-hidden">
     <div className="h-48 bg-gray-300 rounded-t"></div>
@@ -13,7 +12,6 @@ const JobCardSkeleton = () => (
   </div>
 );
 
-/* ---------------- Job Card ---------------- */
 const JobCard = ({ job }) => (
   <div className="card bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] dark:from-gray-800 dark:to-gray-900 shadow-lg h-full rounded-2xl overflow-hidden group transition-transform hover:scale-105">
     <figure className="overflow-hidden">
@@ -37,7 +35,6 @@ const JobCard = ({ job }) => (
   </div>
 );
 
-/* ---------------- Home Page ---------------- */
 const HomePage = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -112,7 +109,6 @@ const HomePage = () => {
   return (
     <div className="space-y-20">
 
-      {/* ---------------- Hero / CTA ---------------- */}
       <section className="min-h-[65vh] flex items-center bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 text-center z-10">
           <h1 className="text-5xl md:text-6xl font-bold mb-4 animate-pulse drop-shadow-lg">
@@ -133,7 +129,6 @@ const HomePage = () => {
         <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-white dark:bg-gray-800 opacity-20 rounded-full animate-pulse"></div>
       </section>
 
-      {/* ---------------- How It Works ---------------- */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-12 text-gray-800 dark:text-gray-200 dark:text-white">How It Works</h2>
@@ -154,7 +149,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* ---------------- Latest Jobs ---------------- */}
       <section className="py-16 bg-gradient-to-r from-[#FFECD1] via-[#D6EDFF] to-[#D4FFEA]">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200">Latest Jobs</h2>
@@ -166,7 +160,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* ---------------- Top Categories ---------------- */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-10 text-gray-800 dark:text-gray-200">Top Categories</h2>
@@ -181,7 +174,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* ---------------- Statistics ---------------- */}
       <section className="py-16 bg-gradient-to-r from-[#FFDEE9] via-[#B5FFFC] to-[#F0FFB8]">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div><h3 className="text-3xl font-bold">5K+</h3><p>Jobs Posted</p></div>
@@ -191,7 +183,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* ---------------- Testimonials ---------------- */}
       <section className="py-16 bg-base-200">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl font-bold mb-10 text-center text-gray-800 dark:text-gray-200">Testimonials</h2>
@@ -212,7 +203,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* ---------------- FAQ ---------------- */}
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-200">FAQ</h2>
@@ -225,7 +215,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* ---------------- CTA ---------------- */}
       <section className="py-16 text-center bg-gradient-to-r from-[#6BCB77] via-[#FFD93D] to-[#FF6B6B] text-white">
         <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
         <Link to="/register" className="btn btn-lg btn-white text-gray-800 dark:text-gray-200 font-bold animate-gradient">

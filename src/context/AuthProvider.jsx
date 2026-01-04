@@ -33,10 +33,9 @@ export const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  // Fixed logout: set user to null after signing out
   const logOut = async () => {
     await signOut(auth);
-    setUser(null); // <- ensures Navbar hides user info after logout
+    setUser(null); 
   };
 
   const authInfo = {

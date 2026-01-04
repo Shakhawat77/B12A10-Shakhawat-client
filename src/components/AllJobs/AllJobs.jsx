@@ -59,7 +59,6 @@ const AllJobs = () => {
   const handleNext = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
-  /* ---------------- Skeleton Loader ---------------- */
   if (loading) {
     return (
       <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6">
@@ -88,7 +87,6 @@ const AllJobs = () => {
     );
   }
 
-  /* ---------------- Empty State ---------------- */
   if (filteredJobs.length === 0) {
     return (
       <div className="text-center py-20 text-gray-600 text-lg font-medium">
@@ -97,11 +95,9 @@ const AllJobs = () => {
     );
   }
 
-  /* ---------------- Actual UI ---------------- */
   return (
     <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Heading + Filters */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-4">
           <h1 className="text-4xl font-bold text-white mb-4 sm:mb-0">
             Explore Freelance Jobs
@@ -140,7 +136,6 @@ const AllJobs = () => {
           </div>
         </div>
 
-        {/* Jobs Grid */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {currentJobs.map((job) => (
             <div
@@ -191,7 +186,6 @@ const AllJobs = () => {
           ))}
         </div>
 
-        {/* Pagination */}
         <div className="flex justify-center items-center gap-4 mt-12">
           <button
             onClick={handlePrev}

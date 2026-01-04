@@ -71,9 +71,7 @@ const Navbar = () => {
 
         <div className="navbar max-w-7xl mx-auto px-4">
 
-          {/* LEFT */}
           <div className="navbar-start">
-            {/* MOBILE MENU */}
             <div className="dropdown lg:hidden">
               <label tabIndex={0} className="btn btn-ghost">
                 <svg
@@ -104,7 +102,6 @@ const Navbar = () => {
             </NavLink>
           </div>
 
-          {/* CENTER */}
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal gap-4 text-white">
               {publicLinks}
@@ -112,7 +109,6 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* RIGHT */}
           <div className="navbar-end gap-3">
             <ThemeToggle />
 

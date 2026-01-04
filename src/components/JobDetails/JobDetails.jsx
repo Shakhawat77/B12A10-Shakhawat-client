@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router";
 import { useAuth } from "../../context/AuthProvider";
 import { toast } from "react-toastify";
 
-/* ---------------- Skeleton Loader ---------------- */
 const JobDetailsSkeleton = () => (
   <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen flex justify-center items-center py-16 px-6">
     <div className="max-w-4xl w-full bg-white dark:bg-gray-800/80 rounded-2xl shadow-xl p-6 animate-pulse">

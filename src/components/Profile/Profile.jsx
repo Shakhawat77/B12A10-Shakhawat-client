@@ -9,7 +9,6 @@ const Profile = () => {
     if (!loading) setPageLoading(false);
   }, [loading]);
 
-  /* ---------------- Skeleton Loader ---------------- */
   if (pageLoading) {
     return (
       <section className="min-h-screen bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] py-16">
@@ -51,7 +50,6 @@ const Profile = () => {
             <p className="text-gray-600">Manage your account information</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Avatar */}
             <div className="flex flex-col items-center gap-4">
               <div className="avatar">
                 <div className="w-32 rounded-full ring ring-white/50 ring-offset-4">
@@ -66,7 +64,6 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Info */}
             <div className="md:col-span-2 space-y-6">
               <div>
                 <label className="label font-semibold">Full Name</label>

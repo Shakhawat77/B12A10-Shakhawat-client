@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { toast } from "react-toastify";
 
-/* ---------------- Skeleton Loader ---------------- */
 const MyAddedJobsSkeleton = () => (
   <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6 flex justify-center">
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl animate-pulse">

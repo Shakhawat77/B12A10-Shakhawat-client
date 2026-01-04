@@ -1,16 +1,72 @@
-# React + Vite
+Freelance Market
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack Freelance Job Marketplace built with MERN stack (MongoDB, Express, React, Node.js). Users can browse, post, accept, and manage freelance jobs. The project includes authentication, role-based features, dark/light theme toggle, job management dashboards, and payment integration support.
 
-Currently, two official plugins are available:
+Live Site
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+https://sage-wisp-b02d66.netlify.app/
 
-## React Compiler
+GitHub Repositories
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Client: https://github.com/Shakhawat77/B12A10-Shakhawat-client
 
-## Expanding the ESLint configuration
+Server: https://github.com/Shakhawat77/B12A10-Shakhawat-server-
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Demo Credentials
+
+You can test the application using the following credentials:
+
+Email: shakhawat222@vendor.com
+
+Password: a1!SHakhawat
+
+Features
+
+
+Authentication:
+
+Email/password authentication
+
+Google login
+
+Protected routes based on user roles
+
+Job Management:
+
+Browse all jobs
+
+Post new jobs
+
+Accept jobs (cannot accept own job)
+
+Update/Delete own jobs
+
+Mark accepted tasks as done
+
+UI/UX:
+
+Fully responsive design
+
+Dark/Light mode toggle
+
+Loading skeletons for better UX
+
+Other Features:
+
+Search, filter, and sort jobs
+
+Stripe payment integration (ready to implement)
+
+JWT and Firebase token protection
+
+Technologies Used
+
+Frontend: React, Tailwind CSS, DaisyUI, React Router, React Icons
+
+Backend: Node.js, Express.js, MongoDB
+
+Authentication: Firebase Authentication
+
+Notifications: React Toastify / React Hot Toast
+
+Deployment: Netlify (Client), Vercel (Server)
