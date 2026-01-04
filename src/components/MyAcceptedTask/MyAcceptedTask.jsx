@@ -1,7 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import { useAuth } from "../../context/AuthProvider"; 
+import { useAuth } from "../../context/AuthProvider";
+
+/* ---------------- Skeleton Loader ---------------- */
+const AcceptedTasksSkeleton = () => (
+  <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6 flex justify-center items-center">
+    <div className="max-w-6xl w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">
+      {[...Array(6)].map((_, i) => (
+        <div key={i} className="rounded-2xl shadow-md overflow-hidden border-none bg-white dark:bg-gray-800/20 p-6">
+          <div className="h-48 bg-gray-300 rounded mb-4"></div>
+          <div className="h-6 bg-gray-300 rounded mb-2 w-3/4"></div>
+          <div className="h-4 bg-gray-300 rounded mb-2 w-full"></div>
+          <div className="h-4 bg-gray-300 rounded mb-2 w-5/6"></div>
+          <div className="flex justify-between items-center mt-4">
+            <div className="h-8 bg-gray-300 rounded w-20"></div>
+            <div className="h-8 bg-gray-300 rounded w-20"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 const MyAcceptedTasks = () => {
   const { user } = useAuth();
@@ -60,37 +80,31 @@ const MyAcceptedTasks = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] items-center h-screen text-lg text-gray-600">
-        Loading your accepted tasks...
-      </div>
-    );
-  }
+  if (loading) return <AcceptedTasksSkeleton />;
 
   if (acceptedJobs.length === 0) {
     return (
-      <div className="text-center py-20 bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] text-gray-500 text-lg font-medium">
+      <div className="text-center py-20 bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] text-gray-700 text-lg font-medium">
         You haven’t accepted any jobs yet.
       </div>
     );
   }
 
   return (
-    <div className="bg-gradient-to-r from-[#49c9a5] to-[#32c5f6] min-h-screen py-16 px-6">
+    <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">
+        <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-gray-200 mb-12">
           My Accepted Tasks
         </h1>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {acceptedJobs.map((job) => {
-            const isOwner = user?.email === job.userEmail; 
+            const isOwner = user?.email === job.userEmail;
 
             return (
               <div
                 key={job._id}
-                className="bg-gradient-to-r from-[#6fecc9] to-[#75d8f9] rounded-2xl shadow-md hover:shadow-xl  duration-300 overflow-hidden border-none"
+                className="bg-gradient-to-r from-[#FFD93D]/30 via-[#FF6B6B]/30 to-[#6BCB77]/30 rounded-2xl shadow-md hover:shadow-xl duration-300 overflow-hidden border-none"
               >
                 <img
                   src={job.coverImage}
@@ -98,7 +112,7 @@ const MyAcceptedTasks = () => {
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
-                  <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                  <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
                     {job.title}
                   </h2>
                   <p className="text-gray-500 text-sm mb-3 line-clamp-2">

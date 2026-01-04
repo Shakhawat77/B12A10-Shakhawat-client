@@ -36,7 +36,6 @@ const AllJobs = () => {
     fetchJobs();
   }, [sortOrder]);
 
-  // Filter & Search
   useEffect(() => {
     let result = [...jobs];
     if (categoryFilter) {
@@ -51,7 +50,6 @@ const AllJobs = () => {
     setCurrentPage(1);
   }, [jobs, categoryFilter, searchTerm]);
 
-  // Pagination logic
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
@@ -64,13 +62,13 @@ const AllJobs = () => {
   /* ---------------- Skeleton Loader ---------------- */
   if (loading) {
     return (
-      <div className="bg-gradient-to-r from-[#47aa8e] to-[#6497a8] min-h-screen py-16 px-6">
+      <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 animate-pulse">
             {[...Array(jobsPerPage)].map((_, index) => (
               <div
                 key={index}
-                className="rounded-2xl overflow-hidden shadow-lg bg-white"
+                className="rounded-2xl overflow-hidden shadow-lg bg-white dark:bg-gray-800"
               >
                 <div className="h-52 bg-gray-300"></div>
                 <div className="p-6 space-y-4">
@@ -93,7 +91,7 @@ const AllJobs = () => {
   /* ---------------- Empty State ---------------- */
   if (filteredJobs.length === 0) {
     return (
-      <div className="text-center py-20 text-gray-500 text-lg font-medium">
+      <div className="text-center py-20 text-gray-600 text-lg font-medium">
         No jobs found with current filters.
       </div>
     );
@@ -101,29 +99,27 @@ const AllJobs = () => {
 
   /* ---------------- Actual UI ---------------- */
   return (
-    <div className="bg-gradient-to-r from-[#47aa8e] to-[#6497a8] min-h-screen py-16 px-6">
+    <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Heading + Filters */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-12 gap-4">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4 sm:mb-0">
+          <h1 className="text-4xl font-bold text-white mb-4 sm:mb-0">
             Explore Freelance Jobs
           </h1>
 
           <div className="flex flex-col sm:flex-row items-center gap-3">
-            {/* Search */}
             <input
               type="text"
               placeholder="Search jobs..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="input input-bordered w-64"
+              className="input input-bordered w-64 bg-white dark:bg-gray-800/90"
             />
 
-            {/* Category filter */}
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="select select-bordered"
+              className="select select-bordered bg-white dark:bg-gray-800/90"
             >
               <option value="">All Categories</option>
               {categories.map((cat, idx) => (
@@ -133,11 +129,10 @@ const AllJobs = () => {
               ))}
             </select>
 
-            {/* Sort */}
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
-              className="select select-bordered"
+              className="select select-bordered bg-white dark:bg-gray-800/90"
             >
               <option value="desc">Newest First</option>
               <option value="asc">Oldest First</option>
@@ -150,7 +145,7 @@ const AllJobs = () => {
           {currentJobs.map((job) => (
             <div
               key={job._id}
-              className="bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden group"
+              className="bg-gradient-to-r from-[#FF6B6B] to-[#6BCB77] rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden group"
             >
               <div className="relative">
                 <img
@@ -158,13 +153,13 @@ const AllJobs = () => {
                   alt={job.title}
                   className="w-full h-52 object-cover group-hover:scale-105 transition-transform"
                 />
-                <div className="absolute top-3 left-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
+                <div className="absolute top-3 left-3 bg-[#FFD93D] text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full font-medium">
                   {job.category}
                 </div>
               </div>
 
-              <div className="p-6">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-2 line-clamp-1">
+              <div className="p-6 bg-white dark:bg-gray-800">
+                <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-2 line-clamp-1">
                   {job.title}
                 </h2>
 
@@ -186,7 +181,7 @@ const AllJobs = () => {
 
                   <Link
                     to={`/job/${job._id}`}
-                    className="animate-gradient px-4 py-2 rounded-lg text-sm"
+                    className="px-4 py-2 rounded-lg text-sm font-medium bg-[#FF6B6B] text-white hover:bg-[#e85b5b]"
                   >
                     View Details
                   </Link>
@@ -201,17 +196,17 @@ const AllJobs = () => {
           <button
             onClick={handlePrev}
             disabled={currentPage === 1}
-            className="btn btn-outline btn-sm"
+            className="btn btn-outline btn-sm bg-white dark:bg-gray-800"
           >
             Prev
           </button>
-          <span className="text-gray-700">
+          <span className="text-white font-medium">
             Page {currentPage} of {totalPages}
           </span>
           <button
             onClick={handleNext}
             disabled={currentPage === totalPages}
-            className="btn btn-outline btn-sm"
+            className="btn btn-outline btn-sm bg-white dark:bg-gray-800"
           >
             Next
           </button>

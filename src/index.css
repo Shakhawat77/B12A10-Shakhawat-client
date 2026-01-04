@@ -5,16 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* -------------------------------------------------
-   Global Transitions
-------------------------------------------------- */
 html {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* -------------------------------------------------
-   Subtle Accent Animation (OPTIONAL – PROFESSIONAL)
-------------------------------------------------- */
 @keyframes softGlow {
   0% {
     box-shadow: 0 0 0 rgba(59, 130, 246, 0);
@@ -31,14 +25,10 @@ html {
   animation: softGlow 4s ease-in-out infinite;
 }
 
-/* -------------------------------------------------
-   Utility Enhancements (Safe)
-------------------------------------------------- */
 .container-padding {
   @apply px-4 md:px-6;
 }
 
-/* Line clamp fallback (if plugin not installed) */
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;

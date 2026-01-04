@@ -1,14 +1,32 @@
-
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthProvider";
 import { toast } from "react-toastify";
+
+/* ---------------- Skeleton Loader ---------------- */
+const MyAddedJobsSkeleton = () => (
+  <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen py-16 px-6 flex justify-center">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl animate-pulse">
+      {[...Array(6)].map((_, i) => (
+        <div key={i} className="rounded-xl shadow-lg bg-white dark:bg-gray-800/30 p-4 flex flex-col">
+          <div className="h-40 w-full bg-gray-300 rounded mb-4"></div>
+          <div className="h-6 bg-gray-300 rounded mb-2 w-3/4"></div>
+          <div className="h-4 bg-gray-300 rounded mb-2 w-full"></div>
+          <div className="h-4 bg-gray-300 rounded mb-2 w-5/6"></div>
+          <div className="flex gap-2 mt-auto">
+            <div className="h-8 bg-gray-300 rounded w-20"></div>
+            <div className="h-8 bg-gray-300 rounded w-20"></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 
 const MyAddedJobs = () => {
   const { user } = useAuth(); 
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
- 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentJob, setCurrentJob] = useState(null);
   const [formData, setFormData] = useState({
@@ -18,6 +36,7 @@ const MyAddedJobs = () => {
     coverImage: "",
   });
   const [updating, setUpdating] = useState(false);
+
   useEffect(() => {
     const fetchJobs = async () => {
       if (!user?.email) return;
@@ -41,6 +60,7 @@ const MyAddedJobs = () => {
 
     fetchJobs();
   }, [user]);
+
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this job?")) return;
 
@@ -58,6 +78,7 @@ const MyAddedJobs = () => {
       toast.error(err.message);
     }
   };
+
   const openUpdateModal = (job) => {
     setCurrentJob(job);
     setFormData({
@@ -68,13 +89,16 @@ const MyAddedJobs = () => {
     });
     setIsModalOpen(true);
   };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setCurrentJob(null);
   };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     setUpdating(true);
@@ -97,32 +121,28 @@ const MyAddedJobs = () => {
       closeModal();
     } catch (err) {
       console.error(err);
-      toast.error( err.message);
+      toast.error(err.message);
     } finally {
       setUpdating(false);
     }
   };
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p>Loading your jobs...</p>
-      </div>
-    );
-  }
+
+  if (loading) return <MyAddedJobsSkeleton />;
+
   if (!jobs || jobs.length === 0) {
     return (
-      <div className="text-center mt-10">
-        <p>No jobs added yet.</p>
+      <div className="text-center  bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] py-40 text-gray-800 dark:text-gray-200 text-lg">
+        No jobs added yet.
       </div>
     );
   }
 
   return (
-    <div className="p-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] min-h-screen p-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {jobs.map((job) => (
         <div
           key={job._id}
-          className="bg-gradient-to-r from-[#2fcfa2] to-[#437586] p-4 rounded-xl shadow-lg flex flex-col justify-between"
+          className="bg-gradient-to-r from-[#FF6B6B]/50 via-[#FFD93D]/50 to-[#6BCB77]/50 p-4 rounded-xl shadow-lg flex flex-col justify-between"
         >
           <img
             src={job.coverImage}
@@ -149,9 +169,10 @@ const MyAddedJobs = () => {
           </div>
         </div>
       ))}
+
       {isModalOpen && (
-        <div className="fixed inset-0 flex items-center bg-gradient-to-r from-[#2fcfa2] to-[#437586] justify-center z-50">
-          <div className="bg-gradient-to-r from-[#2fcfa2] to-[#437586] rounded-lg p-6 w-full max-w-lg">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-gradient-to-r from-[#FF6B6B]/80 via-[#FFD93D]/80 to-[#6BCB77]/80 backdrop-blur-sm">
+          <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] rounded-lg p-6 w-full max-w-lg shadow-xl">
             <h2 className="text-2xl font-bold mb-4">Update Job</h2>
             <form onSubmit={handleUpdateSubmit} className="space-y-4">
               <input
@@ -214,7 +235,7 @@ const MyAddedJobs = () => {
         </div>
       )}
     </div>
-  );
+  ); 
 };
 
 export default MyAddedJobs;

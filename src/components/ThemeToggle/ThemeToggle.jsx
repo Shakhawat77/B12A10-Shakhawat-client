@@ -2,15 +2,21 @@ import { useEffect, useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  // Initialize theme from localStorage or system preference
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || 
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  );
 
   useEffect(() => {
     const root = window.document.documentElement;
+
     if (theme === "dark") {
       root.classList.add("dark");
     } else {
       root.classList.remove("dark");
     }
+
     localStorage.setItem("theme", theme);
   }, [theme]);
 

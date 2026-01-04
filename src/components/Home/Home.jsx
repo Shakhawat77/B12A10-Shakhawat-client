@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 /* ---------------- Skeleton ---------------- */
 const JobCardSkeleton = () => (
-  <div className="card bg-white dark:bg-gray-800 shadow-md animate-pulse h-full rounded-2xl overflow-hidden">
+  <div className="card bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-md animate-pulse h-full rounded-2xl overflow-hidden">
     <div className="h-48 bg-gray-300 rounded-t"></div>
     <div className="p-4 space-y-3">
       <div className="h-5 bg-gray-300 rounded w-3/4"></div>
@@ -15,7 +15,7 @@ const JobCardSkeleton = () => (
 
 /* ---------------- Job Card ---------------- */
 const JobCard = ({ job }) => (
-  <div className="card bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] shadow-lg h-full rounded-2xl overflow-hidden group transition-transform hover:scale-105">
+  <div className="card bg-gradient-to-r from-[#49c9a5] to-[#4db4d7] dark:from-gray-800 dark:to-gray-900 shadow-lg h-full rounded-2xl overflow-hidden group transition-transform hover:scale-105">
     <figure className="overflow-hidden">
       <img
         src={job.coverImage}
@@ -29,7 +29,7 @@ const JobCard = ({ job }) => (
       <p className="text-sm text-white/80 line-clamp-2">{job.summary}</p>
       <Link
         to={`/job/${job._id}`}
-        className="btn btn-sm btn-white mt-auto w-full text-gray-800 hover:text-white hover:bg-gray-700 transition"
+        className="btn btn-sm btn-white mt-auto w-full text-gray-800 dark:text-gray-200 hover:text-white hover:bg-gray-700 transition"
       >
         View Details
       </Link>
@@ -122,21 +122,21 @@ const HomePage = () => {
             Connect with freelancers or clients instantly. Reliable, fast, and secure.
           </p>
           <div className="flex justify-center gap-4">
-            <Link to="/allJobs" className="btn btn-lg btn-white text-gray-800 font-bold animate-gradient">
+            <Link to="/allJobs" className="btn btn-lg btn-white text-gray-800 dark:text-gray-200 font-bold animate-gradient">
               Explore Jobs
             </Link>
-            <Link to="/addAJobs" className="btn btn-lg btn-outline text-white border-white hover:bg-white hover:text-gray-800 animate-gradient">
+            <Link to="/addAJobs" className="btn btn-lg btn-outline text-white border-white hover:bg-white dark:bg-gray-800 hover:text-gray-800 dark:text-gray-200 animate-gradient">
               Post a Job
             </Link>
           </div>
         </div>
-        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-white opacity-20 rounded-full animate-pulse"></div>
+        <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-white dark:bg-gray-800 opacity-20 rounded-full animate-pulse"></div>
       </section>
 
       {/* ---------------- How It Works ---------------- */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-12 text-gray-800 dark:text-white">How It Works</h2>
+          <h2 className="text-3xl font-bold mb-12 text-gray-800 dark:text-gray-200 dark:text-white">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="card bg-gradient-to-r from-[#FF6B6B] to-[#FFD93D] shadow-lg p-6 rounded-xl text-white hover:scale-105 transition">
               <h3 className="font-semibold text-lg mb-2">Post a Job</h3>
@@ -157,7 +157,7 @@ const HomePage = () => {
       {/* ---------------- Latest Jobs ---------------- */}
       <section className="py-16 bg-gradient-to-r from-[#FFECD1] via-[#D6EDFF] to-[#D4FFEA]">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Latest Jobs</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-200">Latest Jobs</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {loading
               ? Array.from({ length: 8 }).map((_, i) => <JobCardSkeleton key={i} />)
@@ -169,7 +169,7 @@ const HomePage = () => {
       {/* ---------------- Top Categories ---------------- */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-10 text-gray-800">Top Categories</h2>
+          <h2 className="text-3xl font-bold mb-10 text-gray-800 dark:text-gray-200">Top Categories</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {topCategories.map(cat => (
               <div key={cat.name} className="card bg-gradient-to-r from-[#FF6B6B] to-[#FFD93D] shadow-lg p-6 rounded-xl text-white hover:scale-105 transition">
@@ -194,7 +194,7 @@ const HomePage = () => {
       {/* ---------------- Testimonials ---------------- */}
       <section className="py-16 bg-base-200">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold mb-10 text-center text-gray-800">Testimonials</h2>
+          <h2 className="text-3xl font-bold mb-10 text-center text-gray-800 dark:text-gray-200">Testimonials</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((t, idx) => (
               <div key={idx} className="card bg-gradient-to-r from-[#FF6B6B] to-[#FFD93D] shadow-lg p-6 rounded-xl text-white hover:scale-105 transition">
@@ -215,9 +215,9 @@ const HomePage = () => {
       {/* ---------------- FAQ ---------------- */}
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-8 text-gray-800">FAQ</h2>
+          <h2 className="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-200">FAQ</h2>
           {faqList.map((faq, idx) => (
-            <div key={idx} className="mb-6 text-left bg-white dark:bg-gray-800 shadow-md p-6 rounded-xl">
+            <div key={idx} className="mb-6 text-left bg-white dark:bg-gray-800 dark:bg-gray-800 shadow-md p-6 rounded-xl">
               <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
               <p className="text-gray-700 dark:text-gray-300">{faq.answer}</p>
             </div>
@@ -228,7 +228,7 @@ const HomePage = () => {
       {/* ---------------- CTA ---------------- */}
       <section className="py-16 text-center bg-gradient-to-r from-[#6BCB77] via-[#FFD93D] to-[#FF6B6B] text-white">
         <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-        <Link to="/register" className="btn btn-lg btn-white text-gray-800 font-bold animate-gradient">
+        <Link to="/register" className="btn btn-lg btn-white text-gray-800 dark:text-gray-200 font-bold animate-gradient">
           Join Now
         </Link>
       </section>

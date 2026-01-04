@@ -34,7 +34,7 @@ const AddAJobs = () => {
 
       if (!res.ok) throw new Error("Failed to post job");
 
-      const result = await res.json();
+      await res.json();
       toast.success("Job posted successfully!");
       
       setFormData({ title: "", category: "", summary: "", coverImage: "" });
@@ -47,8 +47,8 @@ const AddAJobs = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-[#47aa8e] to-[#6497a8] py-20">
-      <div className="max-w-2xl mx-auto rounded-xl shadow-lg bg-gradient-to-r from-[#2fcfa2] to-[#437586] px-6 py-8">
+    <div className="bg-gradient-to-r from-[#FF6B6B] via-[#FFD93D] to-[#6BCB77] py-20">
+      <div className="max-w-2xl mx-auto rounded-xl shadow-lg bg-gradient-to-r from-[#FF6B6B] to-[#6BCB77] px-6 py-8">
         <h2 className="text-3xl font-bold text-white text-center mb-6">
           Post a New Job
         </h2>
@@ -61,22 +61,24 @@ const AddAJobs = () => {
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
-            className="input input-bordered w-full bg-[#3a826d] text-white"
+            className="input input-bordered w-full bg-white/20 text-white placeholder-white/80"
             required
           />
+
           <input
             type="text"
             placeholder="User Name"
             value={user?.displayName || user?.email || ""}
-            className="input input-bordered w-full bg-[#3a826d] text-white"
+            className="input input-bordered w-full bg-white/20 text-white"
             readOnly
           />
+
           <select
             value={formData.category}
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })
             }
-            className="select select-bordered w-full bg-[#3a826d] text-white"
+            className="select select-bordered w-full bg-white/20 text-white"
             required
           >
             <option value="">Select Category</option>
@@ -86,15 +88,17 @@ const AddAJobs = () => {
             <option>SEO</option>
             <option>Video Editing</option>
           </select>
+
           <textarea
             placeholder="Job Summary"
             value={formData.summary}
             onChange={(e) =>
               setFormData({ ...formData, summary: e.target.value })
             }
-            className="textarea textarea-bordered w-full bg-[#3a826d] text-white"
+            className="textarea textarea-bordered w-full bg-white/20 text-white placeholder-white/80"
             required
           />
+
           <input
             type="text"
             placeholder="Cover Image URL"
@@ -102,17 +106,19 @@ const AddAJobs = () => {
             onChange={(e) =>
               setFormData({ ...formData, coverImage: e.target.value })
             }
-            className="input input-bordered w-full bg-[#3a826d] text-white"
+            className="input input-bordered w-full bg-white/20 text-white placeholder-white/80"
           />
+
           <input
             type="email"
             value={user?.email || ""}
             readOnly
-            className="input input-bordered w-full bg-[#3a826d] text-white"
+            className="input input-bordered w-full bg-white/20 text-white"
           />
+
           <button
             type="submit"
-            className="btn btn-primary animate-gradient w-full"
+            className="btn btn-white w-full text-gray-800 font-semibold"
             disabled={loading}
           >
             {loading ? "Posting..." : "Post Job"}
